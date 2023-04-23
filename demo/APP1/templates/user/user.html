@@ -1,0 +1,67 @@
+{% extends 'frame.html' %}
+{% load static%}
+
+{% block main %}
+
+
+
+<head>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			background-color: #f2f2f2;
+			margin: 0;
+			padding: 0;
+		}
+
+		.container {
+			max-width: 800px;
+			margin: 0 auto;
+			padding: 20px;
+			background-color: #fff;
+			box-shadow: 0px 0px 10px #888888;
+		}
+
+		.profile-picture {
+			width: 150px;
+			height: 150px;
+			border-radius: 50%;
+			object-fit: cover;
+			margin: 0 auto;
+			display: block;
+			margin-bottom: 20px;
+		}
+
+		.profile-name {
+			font-size: 32px;
+			font-weight: bold;
+			text-align: center;
+			margin-bottom: 20px;
+		}
+
+		.profile-contact {
+			font-size: 18px;
+			text-align: center;
+			margin-bottom: 20px;
+		}
+
+		.profile-contact span {
+			display: block;
+			margin-top: 10px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<img src="{% static 'img/my.jpg'%}" alt="Profile Picture" class="profile-picture">
+		<h1 class="profile-name">John Doe</h1>
+		<div class="profile-contact">
+			<span>Email: john.doe@example.com</span>
+			<span>Phone: 555-555-5555</span>
+			<span>Address: 123 Main St, Anytown USA</span>
+		</div>
+	</div>
+</body>
+
+{% endblock %}
