@@ -57,7 +57,12 @@
     </ul>
   </nav>
   
-
+  <form action="/submit" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{goods}}
+    <button class="button" >SIGN UP</button>
+  </form>
+<!-- 
     <form action="/submit" method="post">
         <label for="name">商品名称:</label><br>
         <input type="text" id="name" name="name"><br>
@@ -93,5 +98,5 @@
             </div>
         </form>
         <input type="submit" value="提交">
-      </form>
+      </form> -->
 {% endblock  %}

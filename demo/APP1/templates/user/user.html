@@ -20,6 +20,7 @@
 			padding: 20px;
 			background-color: #fff;
 			box-shadow: 0px 0px 10px #888888;
+		
 		}
 
 		.profile-picture {
@@ -49,19 +50,155 @@
 			display: block;
 			margin-top: 10px;
 		}
-	</style>
-</head>
 
+	  /* 导航栏样式 */
+	  nav {
+		background-color: #333;
+		color: white;
+		padding: 10px;
+	  }
+  
+	  nav ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+	  }
+  
+	  nav li {
+		margin-right: 20px;
+	  }
+  
+	  nav a {
+		color: white;
+		text-decoration: none;
+	  }
+  
+	  nav a:hover {
+		text-decoration: underline;
+	  }
+  
+	  /* 商品列表样式 */
+	  .product-list {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		margin: 20px;
+	  }
+  
+	  .product {
+		border: 1px solid #ccc;
+		padding: 10px;
+		width: 300px;
+		margin: 10px;
+		box-shadow: 2px 2px 5px #ccc;
+	  }
+  
+	  .product img {
+		width: 100%;
+	  }
+  
+	  .product h3 {
+		font-size: 18px;
+		margin: 10px 0;
+	  }
+  
+	  .product p {
+		font-size: 14px;
+		margin: 5px 0;
+	  }
+  
+	  .product button {
+		background-color: #4CAF50;
+		color: white;
+		padding: 8px 32px;
+		border: none;
+		border-radius: 4px;
+		cursor: pointer;
+		font-size: 16px;
+		margin-top: 10px;
+	  }
+  
+	  .product button:hover {
+		background-color: #3e8e41;
+	  }
+  
+	  /* 搜索框样式 */
+	  .search-box {
+		display: flex;
+		justify-content: center;
+		margin: 20px;
+	  }
+  
+	  .search-box input[type="text"] {
+		flex: 1;
+		padding: 8px;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+		font-size: 16px;
+	  }
+  
+	  .search-box button {
+		background-color: #4CAF50;
+		color: white;
+		padding: 8px 16px;
+		border: none;
+		border-radius: 4px;
+		cursor: pointer;
+		font-size: 16px;
+		margin-left: 10px;
+	  }
+  
+	  .search-box button:hover {
+		background-color: #3e8e41;
+	  }
+	</style>
+  </head>
 <body>
 	<div class="container">
 		<img src="{% static 'img/my.jpg'%}" alt="Profile Picture" class="profile-picture">
-		<h1 class="profile-name">John Doe</h1>
+		<h1 class="profile-name">{{user.name}}</h1>
 		<div class="profile-contact">
-			<span>Email: john.doe@example.com</span>
-			<span>Phone: 555-555-5555</span>
-			<span>Address: 123 Main St, Anytown USA</span>
+			<span>Email: {{user.email}}</span>
+			<span>Phone: </span>
+			<span>Address: </span>
+			<span>注册时间：{{user.c_time}}</span>
 		</div>
 	</div>
+
+
+	
+	
+
+	  <nav>
+		<ul>
+		  <li><a href="#">全部商品</a></li>
+		  <li><a href="#">在售商品</a></li>
+		  <li><a href="#">已售出</a></li>
+		  
+		</ul>
+	  </nav>
+	  <div class="product-list">
+		{% for i in data%}
+		<form action="/index" method="post">  
+		  {% csrf_token %}
+		  <div class="product">
+	 
+		  <img src="{% static i.image %}" alt="商品图片">
+		  <h3>{{i.name}}</h3>
+		  <p>{{i.remark}}</p>
+		  <p>价格：${{i.price}}</p>
+		  <input type="hidden" name="Goods" value="{{i}}">
+		  <button>上/下架</button><a>已上架</a>
+		  <button>保存</button>
+		  
+		</div>
+	  </form>
+	
+		{% endfor %}
+	  </div>
+
+	
 </body>
 
 {% endblock %}

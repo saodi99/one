@@ -11,7 +11,7 @@ class User(models.Model):
     email = models.EmailField(null=False)
     sex = models.CharField(max_length=32, choices=gender, default="未知")
     c_time = models.DateTimeField(auto_now_add=True)
-    avater = models.ImageField(upload_to="img",max_length=255,default="")
+    avater = models.ImageField(upload_to="img",max_length=255,default="img/my.jpg")
     message = models.CharField(blank=True,max_length=255,default="")
 class Goods(models.Model):
     c_time = models.DateTimeField(auto_now_add=True)
@@ -22,7 +22,7 @@ class Goods(models.Model):
     sort=models.PositiveSmallIntegerField(blank=False)
     count=models.PositiveSmallIntegerField(blank=False)
     display=models.BooleanField(default=False)
-    transaction = models.PositiveSmallIntegerField(blank=False)
+    transaction = models.PositiveSmallIntegerField(blank=True,null=True)
     sales = models.PositiveSmallIntegerField(default=0)
     uid =models.IntegerField()
     image=models.ImageField(upload_to="img",max_length=255)

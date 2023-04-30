@@ -101,7 +101,7 @@
             width: 56px;
             height: 56px;
             border-radius: 30%;
-            background-image: url("{%static 'img/my.jpg'%}");
+            background-image: url("{% static args.0 %}");
             background-size: cover;
         }
     </style>
@@ -109,9 +109,9 @@
 
 <body>
     <div class="shell_c" >
-        <a href="/user" class="bo"><i class="portrait"></i><span id="ma">SAODI</span></a>
+        <a href="/user" class="bo"><i class="portrait"></i><span id="ma">{{ request.session.info.name }}</span></a>
         <a href="/index" class="bo"><i class="iconfont icon-zhuye" ></i><span> 主页</span></a>
-        <a href="/submit" class="bo"><i class="iconfont icon-shangpin"></i><span>出售</span></a>
+        <a href="/submit" class="bo"><i class="iconfont icon-shangpin"></i><span>上架</span></a>
         <a href="/wallet" class="bo"><i class="iconfont icon-qianbao"></i><span>钱包</span></a>
         <a href="/cart" class="bo"><i class="iconfont icon-gouwuchekong"></i><span>购物车</span></a>
         <a href="/user/5" class="bo"><i class="iconfont icon-qr-code"></i><span>QR code</span></a>
