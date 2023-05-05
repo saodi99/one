@@ -109,14 +109,18 @@
 
 <body>
     <div class="shell_c" >
+        {% if request.session.info %}
         <a href="/user" class="bo"><i class="portrait"></i><span id="ma">{{ request.session.info.name }}</span></a>
+        {% else %}
+        <a href="/user" class="bo"><i class="portrait"></i><span id="ma">请登录</span></a>
+        {% endif %}
         <a href="/index" class="bo"><i class="iconfont icon-zhuye" ></i><span> 主页</span></a>
         <a href="/submit" class="bo"><i class="iconfont icon-shangpin"></i><span>上架</span></a>
         <a href="/wallet" class="bo"><i class="iconfont icon-qianbao"></i><span>钱包</span></a>
         <a href="/cart" class="bo"><i class="iconfont icon-gouwuchekong"></i><span>购物车</span></a>
         <a href="/user/5" class="bo"><i class="iconfont icon-qr-code"></i><span>QR code</span></a>
         <a href="/user/6" class="bo"><i class="iconfont icon-anquan"></i><span>身份信息</span></a>
-        <a href="/user/7" class="bo"><i class="iconfont icon-tuichu"></i><span>退出</span></a>
+        <a href="/exit" class="bo"><i class="iconfont icon-tuichu"></i><span>退出</span></a>
     </div>
     <div class="shell_main" style="overflow:auto;display: flex;align-items: center;height: 700px; border: 10px solid #ccc;flex-direction: column">
         {% block main %}

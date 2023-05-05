@@ -52,7 +52,7 @@
       box-shadow: 2px 2px 5px #ccc;
     }
 
-    .product img {
+    .product .goods {
       width: 100%;
     }
 
@@ -110,6 +110,9 @@
     .search-box button:hover {
       background-color: #3e8e41;
     }
+    .user{
+			border-radius: 50%;
+		}
   </style>
 </head>
 <body>
@@ -135,12 +138,23 @@
       {% csrf_token %}
       <div class="product">
  
-      <img src="{% static i.image %}" alt="商品图片">
+      <img src="{% static i.image %}" alt="商品图片"  width="300px" height="280px" class="goods">
       <h3>{{i.name}}</h3>
       <p>{{i.remark}}</p>
+      
       <p>价格：${{i.price}}</p>
       <input type="hidden" name="Goods" value="{{i}}">
+      <span style="display: block;">
+        {% for j in user %}
+        {% if i.uid == j.id %}
+        <img src="{% static j.avater %}" alt="这是一张圆形图片"  width="30px" height="30px" class="user" >
+        <span>{{ j.name }}</span>
+        {% endif %}
+        {% endfor %}
+      </span>
+      
       <button>加入购物车</button>
+      
     </div>
   </form>
 

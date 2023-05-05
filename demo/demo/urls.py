@@ -24,4 +24,6 @@ urlpatterns = [
     path("submit",views.submit),
     path("cart",views.cart),
     path("wallet",views.wallet),
+    path("exit",views.exit),
+    path("user/set",views.user_set)
 ]

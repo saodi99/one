@@ -42,7 +42,7 @@
 
 		.profile-contact {
 			font-size: 18px;
-			text-align: center;
+			text-align: left;
 			margin-bottom: 20px;
 		}
 
@@ -159,11 +159,17 @@
 		<img src="{% static 'img/my.jpg'%}" alt="Profile Picture" class="profile-picture">
 		<h1 class="profile-name">{{user.name}}</h1>
 		<div class="profile-contact">
-			<span>Email: {{user.email}}</span>
-			<span>Phone: </span>
-			<span>Address: </span>
-			<span>注册时间：{{user.c_time}}</span>
+			<form method="post">
+				{% csrf_token %}
+				<p>Email:{{formuser.email}}</p>
+				<p>性别：{{formuser.sex}}</p>
+				<p>注册时间：{{user.c_time}}</p>	
+				<p>{{formuser.message}}</p> 
+				<button>保存</button>
+			</form>
+			
 		</div>
+
 	</div>
 
 
@@ -175,23 +181,31 @@
 		  <li><a href="#">全部商品</a></li>
 		  <li><a href="#">在售商品</a></li>
 		  <li><a href="#">已售出</a></li>
-		  
+		  <li><a href="#">已购买</a></li>
+
 		</ul>
 	  </nav>
 	  <div class="product-list">
 		{% for i in data%}
-		<form action="/index" method="post">  
+		<form action="/user/set" method="post" target="_self" >  
 		  {% csrf_token %}
 		  <div class="product">
 	 
-		  <img src="{% static i.image %}" alt="商品图片">
+		  <img src="{% static i.image %}" alt="商品图片" width="300px" height="280px">
 		  <h3>{{i.name}}</h3>
 		  <p>{{i.remark}}</p>
 		  <p>价格：${{i.price}}</p>
 		  <input type="hidden" name="Goods" value="{{i}}">
-		  <button>上/下架</button><a>已上架</a>
-		  <button>保存</button>
+		  {% if not i.display %}
+		   
+		  <a style="display: block;">未上架</a>
+		  <button>上架</button> 
+		  {% else %}
 		  
+		  <a style="display: block;">已上架</a>
+		  <button>下架</button> 
+		  {% endif %}
+		  <button>保存/修改</button>
 		</div>
 	  </form>
 	
