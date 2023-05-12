@@ -84,8 +84,37 @@ def submit(request,*args):
 @frame
 def cart(request,*args):
     if request.method=="GET":
+        cart=models.Shopping_cart.objects.filter(uid=request.session.get("info")["id"])
+        data=[]
+        suser=[]
+        for i in cart:
+            goods=models.Goods.objects.get(id=i.sid)
+            data.append({
+                "id":goods.id,
+                "name":goods.name,
+                "price":goods.price,
+                "img":goods.image,
+                "count":goods.count,    
+                "display":goods.display,
+                "seller_id":goods.uid
+                })
+            scr={
+                "seller_id":goods.uid,
+                "uname":models.User.objects.get(id=goods.uid).name,
+                "avater":models.User.objects.get(id=goods.uid).avater,
+            }
+            if scr not in suser :
+                suser.append(scr) 
+        print(data)
         return render(request,"cart/cart.html",locals())
-    
+    print(request.POST)
+    models.Shopping_cart.objects.create(
+        display=True,
+        uid=request.session.get("info")["id"],
+        sid=request.POST.get("Goods"),
+        quantity=1
+    )
+    return redirect("/cart")
 #搜索展示
 def searching_goods(request):
     pass
@@ -97,5 +126,12 @@ def exit(req):
     return redirect("/index")
 
 def user_set(requset):
-    print(requset)
+    set=models.Goods.objects.filter(id=requset.POST.get("Goods"))
+    set.update(display=not set[0].display)
     return redirect("/user")
+def show(request,uid):
+    print(uid)
+    return redirect("/index")
+def  test(requset):
+    print(requset.GET)
+    return HttpResponse("未实现")

@@ -134,7 +134,8 @@
   </nav>
   <div class="product-list">
     {% for i in data%}
-    <form action="/index" method="post">  
+    {% if i.display %}
+    <form action="/cart" method="post">  
       {% csrf_token %}
       <div class="product">
  
@@ -143,21 +144,21 @@
       <p>{{i.remark}}</p>
       
       <p>价格：${{i.price}}</p>
-      <input type="hidden" name="Goods" value="{{i}}">
+      <input type="hidden" name="Goods" value="{{i.id}}">
       <span style="display: block;">
         {% for j in user %}
         {% if i.uid == j.id %}
-        <img src="{% static j.avater %}" alt="这是一张圆形图片"  width="30px" height="30px" class="user" >
+        <img src="{% static j.avater %}" alt="{{i.name}}"  width="30px" height="30px" class="user" >
         <span>{{ j.name }}</span>
         {% endif %}
         {% endfor %}
       </span>
-      
+      {% if request.session.info.id != i.uid %}
       <button>加入购物车</button>
-      
+      {% endif %}
     </div>
   </form>
-
+    {% endif %}
     {% endfor %}
   </div>
 </body>

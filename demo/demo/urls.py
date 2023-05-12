@@ -25,5 +25,7 @@ urlpatterns = [
     path("cart",views.cart),
     path("wallet",views.wallet),
     path("exit",views.exit),
-    path("user/set",views.user_set)
+    path("user/set",views.user_set),
+    path("test",views.test),
+    path("user/<int:uid>",views.show)
 ]

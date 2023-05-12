@@ -1,70 +1,165 @@
 {% extends 'frame.html' %}
-
+{% load static %}
 
 {% block main %}
-<style>
-.product {
-display: flex;
-flex-direction: column;
-align-items: center;
-margin-bottom: 20px;
-width: 100%;
-}
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="{% static 'Public/components/bootstrap/css/bootstrap.min.css' %}">	
+	<link rel="stylesheet" href="{% static 'Public/css/index.css' %}">
+	<script src="{% static 'Public/components/jQuery/js/jquery.min.js' %}"></script>
+	<script src="{% static 'Public/components/bootstrap/js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'Public/js/index.js' %}"></script>
+</head>
+<body>
 
-.product img {
-width: 100%;
-height: auto;
-}
+	<div class="container cart-main">
+		<div class="cart-head">
+			<ul class="cart-list cart-top list-inline">
+				<li class="list-chk">
+					<input type="checkbox" id="checkAll" class="check-all" />
+					<label for="checkAll" class="c6">全选</label>
+				</li>
+				<li class="list-msg">商品</li>
+				<li class="list-amount">数量</li>
+				<li class="list-price">单价</li>
+				<li class="list-sum">总价</li>
+				<li class="list-operation">操作</li>
+			</ul>
+		</div>
+		<div class="cart-box">
+			{% for i in suser%}
+		
+			<div class="shop-info">
+				<div class="all-check">
+					<input type="checkbox" id="shop0" class="shop-check" />
+					<label for="shop0">
+						<img src="{% static i.avater %}" style="height: 20px;width: 20px;"/>
+						卖家：
+					</label>
+					<a href="user/{{i.seller_id}}">{{i.uname}}</a>
+				</div>
+				<div class="shop-name"></div>
+			</div>
+			
+			{% for j in data %}
+			{% if i.seller_id == j.seller_id %}
+			<div class="cart-content">
+				<ul class="cart-list">
+					<li class="list-chk">
+						<input type="checkbox" id="checkBox0" class="goods-check" style="display: inline-block;" />
+					</li>
+					<li class="list-msg">
+						<div class="list-img">
+							<a href="javascript:;">
+								<img src="{% static j.img %}" alt="" />
+							</a>
+						</div>
+						<div class="list-des">
+							<p class="p-info">
+								<a href="javascript:;">{{j.name}}</a>
+							</p>
+							<p class="p-type">成色：</p>
+							<p class="p-color">颜色：灰色</p>
+							<p id="count" data-value="{{j.count}}">数量：{{j.count}}</p>
+						</div>
+					</li>
+					<li class="list-amount">
+						<div class="amount-box">
+							<a href="javascript:;" class="reduce reSty">-</a>
+							<input type="text" value="1" class="sum">
+							<a href="javascript:;" class="add">+</a>
+						</div>
+					</li>
+					<li class="list-price">
+						<p class="price">￥{{j.price}}</p>
+					</li>
+					<li class="list-sum">
+						<p class="sum-price">￥{{j.price}}</p>
+					</li>
+					<li class="list-operation">
+						<div class="btn-operation">
+							<a href="javascript:;" class="btn-del">删除</a>
+							<a href="javascript:;" class="btn-col">收藏</a>
+						</div>
+					</li>
+				</ul>
+	
+			</div>
+			{% endif %}
+			{% endfor %}
+			{% endfor %}
+		</div>
+	</div>
 
-.product h3, .product p {
-margin: 5px 0;
-}
 
-.product p {
-margin-left: auto; /* 将价格向右对齐 */
-}
 
-.product button {
-background-color: #4CAF50;
-color: white;
-border: none;
-padding: 10px;
-cursor: pointer;
-margin-left: auto; /* 将按钮向右对齐 */
-}
 
-.product-container {
-display: flex;
-flex-wrap: wrap;
-justify-content: space-around;
-}
 
-@media screen and (max-width: 768px) {
-.product-container {
-flex-direction: column;
-align-items: center;
-}
-}
-</style>
-<div class="product-container">
-    <div class="product">
-      <img src="product1.jpg">
-      <h3>Product 1</h3>
-      <p>Price: $10</p>
-      <button>Add to Cart</button>
-    </div>
-    <div class="product">
-      <img src="product2.jpg">
-      <h3>Product 2</h3>
-      <p>Price: $20</p>
-      <button>Add to Cart</button>
-    </div>
-    <div class="product">
-      <img src="product3.jpg">
-      <h3>Product 3</h3>
-      <p>Price: $30</p>
-      <button>Add to Cart</button>
-    </div>
-  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<div class="cart-toolbar">		
+		<div class="container cart-footer">
+			<div class="footer-left">
+				<ul class="list-inline">
+					<li><a href="javascript:;" class="btn-del-choose">删除选中的商品</a></li>
+				</ul>      	
+			</div>
+			<div class="footer-right">
+				<div class="amount">已选择<strong class="amount-num">0</strong>件商品</div>
+				<div class="sum">总价:<strong class="total-sum">￥0.00</strong></div>
+				<div class="btn-area"><a href="javascript:;" class="btn-sum">去结算</a></div>  
+			</div>
+		</div>
+	</div>
+	<!-- 删除商品自定义模态框 -->
+	<div class="modal-backdrop fade in" style="display: none;"></div>
+	<div class="modal-goodsdel modal-del">
+		<p class="title-del">删除宝贝<span class="closeModal">x</span></p>
+		<p>您确定要删除该宝贝吗</p>
+		<div class="btn-goodsdel btn-modal">
+			<a href="javascript:;" class="btn btn-default btn-sure">确定</a>
+			<a href="javascript:;" class="btn btn-default btn-close">关闭</a>
+		</div>
+	</div>
+	<!-- 删除选中商品自定义模态框 -->
+	<div class="modal-seldel modal-del">
+		<p class="title-del">删除宝贝<span class="closeModal">x</span></p>
+		<p>您确定要删除这些宝贝吗</p>
+		<div class="btn-seldel btn-modal">
+			<a href="javascript:;" class="btn btn-default btn-sure">确定</a>
+			<a href="javascript:;" class="btn btn-default btn-close">关闭</a>
+		</div>
+	</div>
+	<!-- 清除无效商品自定义模态框 -->
+	<div class="modal-voiddel modal-del">
+		<p class="title-del">删除宝贝<span class="closeModal">x</span></p>
+		<p>您确定要删除无效商品吗</p>
+		<div class="btn-voiddel btn-modal">
+			<a href="javascript:;" class="btn btn-default btn-sure">确定</a>
+			<a href="javascript:;" class="btn btn-default btn-close">关闭</a>
+		</div>
+	</div>
+
+</body>
+</html>
+
 {% endblock  %}
+
 
