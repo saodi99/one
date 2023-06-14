@@ -17,15 +17,21 @@ from django.contrib import admin
 from django.urls import path
 from APP1 import views
 urlpatterns = [
+    path("",views.index),
     path("admin/", admin.site.urls),
     path("login/",views.login),
     path("index",views.index),
+    path("index/<int:num>",views.index),
     path("user",views.user_page),
     path("submit",views.submit),
     path("cart",views.cart),
     path("wallet",views.wallet),
     path("exit",views.exit),
     path("user/set",views.user_set),
-    path("test",views.test),
-    path("user/<int:uid>",views.show)
+    path("test/<int:i>",views.test),
+    path("user/<int:uid>",views.show),
+    path("qr",views.qr),
+    path("img/<str:str>",views.img),
+    path('docs', views.docs, name='docs'),
+    path("set",views.set)
 ]

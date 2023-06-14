@@ -3,28 +3,31 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'user/iconfont.css'%}">
-    
 
-    <title>User</title>
+
+    <title>校园二手交易平台</title>
+    <link rel="icon" href="/static/frame/img/logo_1.png">
     <style>
         * {
             padding: 0;
             margin: 0;
             text-decoration: none;
-        } 
+        }
+
         body {
             background-color: rgb(209, 213, 219);
-            display: flex;
             justify-content: space-evenly;
             height: 100vh;
             align-items: center;
         }
 
         .shell_c {
+            margin: 50px 0 0 100px;
             width: 100px;
             height: 700px;
             display: flex;
@@ -36,15 +39,18 @@
             transition: .3s;
             overflow: hidden;
         }
+
         .shell_main {
-    width: 72%;
-    height: 700px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    background-color: rgb(243, 244, 246);
-    border-radius: 10px;
-}
+            margin: 50px 0 0 280px;
+            width: 72%;
+            height: 700px;
+
+            /* align-items: center;
+            flex-direction: column; */
+            background-color: rgb(243, 244, 246);
+            border-radius: 10px;
+        }
+
         .bo {
             display: block;
             height: 15%;
@@ -54,17 +60,18 @@
             position: relative;
             transition: .3s;
             color: rgb(160, 160, 175);
-            
+
         }
+
         .bo i {
             font-size: 60px;
             position: absolute;
             margin: 7px 0 0 13px;
-            
+
         }
 
         .bo:nth-child(1)::before,
-        .bo:nth-child(5)::before{
+        .bo:nth-child(5)::before {
             content: '';
             display: block;
             width: 100%;
@@ -81,21 +88,26 @@
             font: 500 20px '';
             opacity: 0;
             transition: .1s;
- 
+
         }
-        .shell_c:hover{
+
+        .shell_c:hover {
             width: 270px;
         }
-        .bo:hover{
+
+        .bo:hover {
             background-color: rgb(55, 65, 81);
         }
-        .shell_c:hover span{
+
+        .shell_c:hover span {
             opacity: 1;
         }
-        .bo:hover{
+
+        .bo:hover {
             color: #fff;
         }
-        .bo .portrait{
+
+        .bo .portrait {
             content: '';
             display: block;
             width: 56px;
@@ -104,25 +116,100 @@
             background-image: url("{% static args.0 %}");
             background-size: cover;
         }
+
+        .top-bar {
+            width: 100%;
+            height: 50px;
+            margin: 0;
+            display: flex;
+        }
+
+        .box-top {
+            width: 100%;
+            min-width: 1350px;
+            background-color: rgba(255, 255, 255, 0.5);
+            padding: 20px;
+            /*border-bottom-left-radius: 8px;*/
+            /*border-bottom-right-radius: 8px;*/
+        }
+
+        .top-ui {
+            width: 100%;
+            min-width: 800px;
+            height: 50px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .top-ui li {
+            width: 10%;
+            min-width: 50px;
+            margin: -5px 50px 0 70px;
+            float: left;
+            text-align: center;
+            display: block;
+        }
+
+        .top-ui a {
+            color: black;
+            text-decoration: none;
+        }
+
+        .top-ui a:hover {
+            color: white;
+        }
+
+        .top-ui img {
+            height: 60px;
+            margin: 0;
+            padding: 0;
+            display: inline;
+            position: relative;
+            top: -20px;
+        }
     </style>
 </head>
 
 <body>
-    <div class="shell_c" >
+    <div class="top-bar">
+        <div class="box-top">
+            <ul class="top-ui">
+                <li>
+                    <a href="/"><img src="{% static 'frame/img/logo.png'%}"></a>
+                </li>
+                <li>
+                    <a href="/index">主页</a>
+                </li>
+                <li>
+                    <a href="#">推荐</a>
+                </li>
+                <li>
+                    <a href="/submit">上架商品</a>
+                </li>
+                <li>
+                    <a href="/docs">帮助</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="shell_c" style="float: left;">
         {% if request.session.info %}
         <a href="/user" class="bo"><i class="portrait"></i><span id="ma">{{ request.session.info.name }}</span></a>
         {% else %}
         <a href="/user" class="bo"><i class="portrait"></i><span id="ma">请登录</span></a>
         {% endif %}
-        <a href="/index" class="bo"><i class="iconfont icon-zhuye" ></i><span> 主页</span></a>
-        <a href="/submit" class="bo"><i class="iconfont icon-shangpin"></i><span>上架</span></a>
+        <a href="/index" class="bo"><i class="iconfont icon-zhuye"></i><span> 主页</span></a>
+        <a href="/submit" class="bo"><i class="iconfont icon-shangpin"></i><span>上架商品</span></a>
         <a href="/wallet" class="bo"><i class="iconfont icon-qianbao"></i><span>钱包</span></a>
         <a href="/cart" class="bo"><i class="iconfont icon-gouwuchekong"></i><span>购物车</span></a>
-        <a href="/user/5" class="bo"><i class="iconfont icon-qr-code"></i><span>QR code</span></a>
-        <a href="/user/6" class="bo"><i class="iconfont icon-anquan"></i><span>身份信息</span></a>
+        <a href="/qr" class="bo"><i class="iconfont icon-qr-code"></i><span>QR code</span></a>
+        <a href="/set" class="bo"><i class="iconfont icon-anquan"></i><span>身份信息</span></a>
         <a href="/exit" class="bo"><i class="iconfont icon-tuichu"></i><span>退出</span></a>
     </div>
-    <div class="shell_main" style="overflow:auto;display: flex;align-items: center;height: 700px; border: 10px solid #ccc;flex-direction: column">
+    <div class="shell_main"
+        style="overflow:auto;display: flex;align-items: center;height: 700px; border: 10px solid #ccc;flex-direction: column">
         {% block main %}
         test
         {% endblock %}

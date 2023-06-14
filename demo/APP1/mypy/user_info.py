@@ -24,7 +24,9 @@ def get(request,*args):
     "sex":user.sex,
     "email": user.email,
     "message":  user.message if user.message else "说点什么吧...",
+    "img": user.avater
     }
+    
     formuser=userinfo(form_data)
     return render(request,"user/user.html",locals())
 def post(request,*args):

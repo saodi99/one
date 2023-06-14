@@ -25,12 +25,13 @@ SECRET_KEY = "django-insecure-r-mwf*52)ywn_jaw%h!z68f8@i339382me3b-me=)!i@md$dmv
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'simpleui',
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -106,7 +107,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'zh-hans'
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Asia/Shanghai"
 
 USE_I18N = True
 
@@ -125,3 +126,16 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 MEDIA_ROOT = ""
 MEDIA_URL = ''
+SIMPLEUI_LOGO="/static/frame/img/logo_1.png"
+SIMPLEUI_HOME_INFO = False 
+SIMPLEUI_ANALYSIS = False 
+SIMPLEUI_ICON = {
+    '商品信息': 'fa massage',
+    '商品留言': "fa-sharp fa-regular fa-messages",
+    "用户购物车":"fa fa-shopping-cart",
+    "密码":"fa fa-key",
+    "商品信息":"fa fa-list-alt",
+    "商品留言":"fa fa-commenting",
+    "用户发布的商品":"fa fa-upload",
+    "用户已购买商品":"fa fa-plus-square"
+}

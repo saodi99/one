@@ -1,0 +1,106 @@
+{% extends 'frame.html' %}
+{% load static%}
+
+{% block main %}
+<style>
+    .contact-form {
+        background-color: #f2f2f2;
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    .contact-form label {
+        color: black;
+    }
+
+    .contact-form .heading {
+        font-size: 24px;
+        color: black;
+        ;
+        margin-bottom: 12px;
+        font-weight: bold;
+        display: block;
+    }
+
+    .contact-form form {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+    }
+
+    .contact-form label {
+        margin-bottom: 10px;
+    }
+
+    textarea {
+        resize: none;
+        height: 80px;
+        width: 200px;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        margin-bottom: 20px;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+        outline: none;
+        -webkit-box-shadow: 0 0 5px #ff6384;
+        box-shadow: 0 0 5px #ff6384;
+        -webkit-transform: scale(1.05);
+        -ms-transform: scale(1.05);
+        transform: scale(1.05);
+        -webkit-transition: -webkit-transform 0.3s ease-in-out;
+        transition: -webkit-transform 0.3s ease-in-out;
+        transition: transform 0.3s ease-in-out;
+        transition: transform 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
+    }
+
+    .contact-form button[type="submit"] {
+        background-color: #ff6384;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    .contact-form button[type="submit"]:hover {
+        -webkit-transform: scale(1.1);
+        -ms-transform: scale(1.1);
+        transform: scale(1.1);
+        -webkit-transition: -webkit-transform 0.3s ease-in-out;
+        transition: -webkit-transform 0.3s ease-in-out;
+        transition: transform 0.3s ease-in-out;
+        transition: transform 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
+    }
+</style>
+<div class="contact-form">
+
+    <span class="heading">信息设置</span>
+    <form action="/set" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="name">性别:</label>
+        {{formuser.sex}}
+
+        <label for="email">Email:</label>
+        {{formuser.email}}
+        <label for="message">留言:</label>
+
+        {{formuser.message}}
+        {{formuser.img}}
+        <button type="submit">提交</button>
+
+    </form>
+</div>
+
+{% endblock %}

@@ -192,7 +192,7 @@ $(function(){
             $cartBox.remove();
         }  
         if($(".cart-box").length == 0){
-            window.location.href='test';
+            window.location.href='test/0';
         }        
         closeM();
         $goodsCheckBox = $(".goods-check");
@@ -239,7 +239,7 @@ $(function(){
                         $cartBox.remove();
                     }    
                     if($(".cart-box").length == 0){
-                        window.location.href='test';
+                        window.location.href='test/1';
                     }    
                     closeM();
                     totalMoney(); 
@@ -260,36 +260,6 @@ $(function(){
             });   
     });
 
-    //-----清除无效商品-----
-    $(".cart-footer .btn-void").on("click",function(){
-        $listVoid = $(".list-void");
-        $cartContent = $listVoid.parents(".cart-content"); 
-        $cartBox = $cartContent.parents(".cart-box");               
-        $(".modal-backdrop").fadeIn(300);
-        $(".modal-voiddel").fadeIn(300);
-        $(".btn-voiddel .btn-sure").on("click",function(){
-            $listVoid.remove();
-            if($cartContent.html().trim() == null || $cartContent.html().trim().length == 0){
-                $cartBox.remove();
-            }    
-            if($(".cart-box").length == 0){
-                window.location.href='test';
-            }    
-            closeM();           
-        });
-
-        //关闭模态框
-        $(".closeModal").click(function () {
-            closeM();
-        });
-        $(".btn-voiddel .btn-close").click(function () {
-            closeM();
-        });
-        function closeM() {
-            $(".modal-backdrop").fadeOut(300);
-            $(".modal-voiddel").fadeOut(300);
-        } 
-    });
 
 
     

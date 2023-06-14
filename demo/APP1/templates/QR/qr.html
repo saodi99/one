@@ -1,0 +1,6 @@
+{% extends 'frame.html' %}
+{% load static %}
+{% block main %}
+<object data="{% static qr %}" type="image/svg+xml"></object>
+<p>扫码查看用户商品</p>
+{% endblock %}

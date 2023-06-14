@@ -6,6 +6,7 @@
 
 
 <html>
+
 <head>
   <title>商品列表</title>
   <style type="text/css">
@@ -110,11 +111,13 @@
     .search-box button:hover {
       background-color: #3e8e41;
     }
-    .user{
-			border-radius: 50%;
-		}
+
+    .user {
+      border-radius: 50%;
+    }
   </style>
 </head>
+
 <body>
 
 
@@ -133,74 +136,82 @@
     </ul>
   </nav>
   <div class="product-list">
-    {% for i in data%}
+    {% for i in data %}
     {% if i.display %}
-    <form action="/cart" method="post">  
+    <form action="/cart" method="post">
       {% csrf_token %}
       <div class="product">
- 
-      <img src="{% static i.image %}" alt="商品图片"  width="300px" height="280px" class="goods">
-      <h3>{{i.name}}</h3>
-      <p>{{i.remark}}</p>
-      
-      <p>价格：${{i.price}}</p>
-      <input type="hidden" name="Goods" value="{{i.id}}">
-      <span style="display: block;">
-        {% for j in user %}
-        {% if i.uid == j.id %}
-        <img src="{% static j.avater %}" alt="{{i.name}}"  width="30px" height="30px" class="user" >
-        <span>{{ j.name }}</span>
+
+        <img src="{% static i.image %}" alt="商品图片" width="300px" height="280px" class="goods">
+        <h3>{{i.name}}</h3>
+        <p>{{i.remark}}</p>
+
+        <p>价格：{{i.price}}￥</p>
+        <input type="hidden" name="Goods" value="{{i.id}}">
+        <span style="display: block;">
+          {% for j in user %}
+          {% if i.uid == j.id %}
+          <a href="/user/{{ j.id }}">
+            <img src="{% static j.avater %}" alt="{{i.name}}" width="30px" height="30px" class="user">
+            <span>{{ j.name }}</span>
+          </a>
+          {% endif %}
+          {% endfor %}
+        </span>
+        {% if request.session.info.id != i.uid %}
+        <button>加入购物车</button>
         {% endif %}
-        {% endfor %}
-      </span>
-      {% if request.session.info.id != i.uid %}
-      <button>加入购物车</button>
-      {% endif %}
-    </div>
-  </form>
+      </div>
+    </form>
     {% endif %}
     {% endfor %}
   </div>
 </body>
+
 </html>
 
 <html>
+
 <head>
-	<title>分页示例</title>
-	<style>
-		.page-link {
-			display: inline-block;
-			padding: 5px 10px;
-			background-color: #f2f2f2;
-			border: 1px solid #ccc;
-			text-decoration: none;
-			color: #333;
-			font-weight: bold;
-			border-radius: 5px;
-			margin-right: 5px;
-		}
-		.page-link.active {
-			background-color: #007bff;
-			color: #fff;
-			border-color: #007bff;
-		}
-	</style>
+  <title>分页示例</title>
+  <style>
+    .page-link {
+      display: inline-block;
+      padding: 5px 10px;
+      background-color: #f2f2f2;
+      border: 1px solid #ccc;
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+      border-radius: 5px;
+      margin-right: 5px;
+    }
+
+    .page-link.active {
+      background-color: #007bff;
+      color: #fff;
+      border-color: #007bff;
+    }
+  </style>
 </head>
+
 <body>
-	<div class="pagination">
-		<a href="#" class="page-link">&laquo;</a>
-		<a href="#" class="page-link active">1</a>
-		<a href="#" class="page-link">2</a>
-		<a href="#" class="page-link">3</a>
-		<a href="#" class="page-link">4</a>
-		<a href="#" class="page-link">5</a>
-		<a href="#" class="page-link">&raquo;</a>
-	</div>
+  <div class="pagination">
+    <a href="/index/{{args.1|add:-1}}" class="page-link">&laquo;</a>
+    {% for i in count %}
+    {% if args.1 == i|add:1 %}
+    <a href="/index/{{ i|add:1 }}" class="page-link active">{{ i|add:1 }}</a>
+    {% else %}
+    <a href="/index/{{ i|add:1 }}" class="page-link ">{{ i|add:1 }}</a>
+    {% endif %}
+    {%endfor%}
+    <a href="/index/{{args.1|add:1}}" class="page-link">&raquo;</a>
+  </div>
 </body>
+
 </html>
 
 
 
 
-{% endblock  %}
-
+{% endblock %}
